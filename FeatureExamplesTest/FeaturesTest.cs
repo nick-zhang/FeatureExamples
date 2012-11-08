@@ -79,7 +79,7 @@ namespace FeatureExamplesTest
             const string searchTerm = "data";
 
             //Convert the string into an array of words 
-            string[] source = text.Split(new[] {'.', '?', '!', ' ', ';', ':', ','},
+            var source = text.Split(new[] {'.', '?', '!', ' ', ';', ':', ','},
                                          StringSplitOptions.RemoveEmptyEntries);
 
             // Create and execute the query. It executes immediately  
@@ -155,10 +155,10 @@ namespace FeatureExamplesTest
         [TestMethod]
         public void TestExtensionMethod1()
         {
-            DateTime dateTime = DateTime.Now;
+            var dateTime = new DateTime(2012, 11, 5);
             var dateFormater = new DateFormater();
 
-            string yyyyMmDd = dateFormater.YYYY_MM_DD(dateTime);
+            var yyyyMmDd = dateFormater.YYYY_MM_DD(dateTime);
 
             Assert.AreEqual("2012_11_05", yyyyMmDd);
         }
