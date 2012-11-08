@@ -11,6 +11,7 @@ namespace FeatureExamplesTest
         [TestMethod]
         public void FilterItemsContainedByOtherArray()
         {
+            // Output: david carry
             string[] names1 = { "nick", "david", "carry" };
             string[] names2 = { "carry", "david" };
             var selectedNames = new List<string>();
@@ -26,6 +27,30 @@ namespace FeatureExamplesTest
             foreach (var name in selectedNames)
             {
                 Console.Out.WriteLine(name);
+            }
+        }
+
+        [TestMethod]
+        public void SelectTheLeftOnes()
+        {
+            string[] names1 = { "nick", "david", "carry" };
+            string[] names2 = { "carry", "david" };
+
+            var filteredNames = names1.Where(name => !names2.Contains(name));
+            foreach (var name in filteredNames)
+            {
+                Console.Out.WriteLine(name);
+            }
+        }
+
+        [TestMethod]
+        public void GetAllUpperCaseItems()
+        {
+            string[] names = { "nick", "david", "carry" };
+            var upperWords = names.Select(name => name.ToUpper());
+            foreach (var word in upperWords)
+            {
+                Console.Out.WriteLine(word);
             }
         }
 

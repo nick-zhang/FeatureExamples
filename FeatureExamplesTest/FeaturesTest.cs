@@ -90,7 +90,7 @@ namespace FeatureExamplesTest
                                              select word;
 
             // Count the matches. 
-            int wordCount = matchQuery.Count();
+            var wordCount = matchQuery.Count();
             Console.WriteLine("{0} occurrences(s) of the search term \"{1}\" were found.", wordCount, searchTerm);
         }
 
