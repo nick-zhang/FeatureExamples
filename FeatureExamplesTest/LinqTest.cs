@@ -9,7 +9,7 @@ namespace FeatureExamplesTest
     public class LinqTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void FilterItemsContainedByOtherArray()
         {
             string[] names1 = { "nick", "david", "carry" };
             string[] names2 = { "carry", "david" };
@@ -23,11 +23,71 @@ namespace FeatureExamplesTest
                 }
             }
 
-            
             foreach (var name in selectedNames)
             {
-                Console.Out.WriteLine();
+                Console.Out.WriteLine(name);
             }
+        }
+
+        [TestMethod]
+        public void SortArrayAscending()
+        {
+            string[] names1 = { "nick", "david", "carry" };
+            var orderedEnumerable = names1.OrderBy(s => s);
+            foreach (var name in orderedEnumerable)
+            {
+                Console.Out.WriteLine(name);
+            }
+        }
+
+        [TestMethod]
+        public void SortArrayDescending()
+        {
+            string[] names1 = { "nick", "david", "carry" };
+            var orderedEnumerable = names1.OrderBy(s => s).Reverse();
+            foreach (var name in orderedEnumerable)
+            {
+                Console.Out.WriteLine(name);
+            }
+        }
+
+        [TestMethod]
+        public void MakeWordWithRandomLetters()
+        {
+            const string word = "happy";
+            var random = new Random();
+            var randomLetterWord = new string(word.ToCharArray().OrderBy(s=>random.Next()).ToArray());
+            Console.Out.WriteLine(randomLetterWord);
+        }
+
+        [TestMethod]
+        public void MakeWordStarAndEndLetterUnchangedButMiddleLettersInRamdonOrder()
+        {
+            const string word = "happy";
+            var random = new Random();
+            var randomLetterInMiddle = word[0]+ new string(word.Substring(1, word.Length-2).ToCharArray().OrderBy(s => random.Next()).ToArray()) + word[word.Length -1];
+            Console.Out.WriteLine(randomLetterInMiddle);
+        }
+
+        [TestMethod]
+        public void SortALongString()
+        {
+            const string text = "It does not matter";
+            var orderedText = string.Join(" ", text.Split(' ').OrderBy(s => s));
+            Console.Out.WriteLine(orderedText);
+        }
+
+        [TestMethod]
+        public void ScrambleTextByWord()
+        {
+            const string text = "According to a research at Cambridge University it does not matter in what order the letters in a word are";
+
+//            const string text1 = "Adcorcing to a rrseaech at Cambgidre Univeristy it does not mttaer in waht oredr the letters in a wrod are";
+
+            var random = new Random();
+            var scrambledText = string.Join(" ", text.Split(' ').Select(word => word.Length < 3 ? word : word[0] + new string(word.Substring(1, word.Length - 2).OrderBy(s => random.Next()).ToArray()) + word[word.Length - 1]));
+
+            Console.Out.WriteLine(scrambledText);
         }
     }
 }
