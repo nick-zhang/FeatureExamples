@@ -24,7 +24,7 @@ namespace FeatureExamplesTest
         {
             var yieldExample = new YieldExample();
             // What's the out put?
-            yieldExample.WithNoYield();
+//            yieldExample.WithNoYield();
 
             // What's the out put? 
             yieldExample.WithYield();
@@ -41,8 +41,13 @@ namespace FeatureExamplesTest
 //                Console.WriteLine(i);
 //            }
 
+
             // What's the output?
-            foreach (int i in yieldExample.WithYield())
+            IEnumerable<int> withYield = yieldExample.WithYield();
+            Console.Out.WriteLine(withYield.Count());
+
+            Console.Out.WriteLine("******");
+            foreach (int i in withYield)
             {
                 Console.WriteLine(i);
             }
@@ -79,7 +84,7 @@ namespace FeatureExamplesTest
             const string searchTerm = "data";
 
             //Convert the string into an array of words 
-            var source = text.Split(new[] {'.', '?', '!', ' ', ';', ':', ','},
+            string[] source = text.Split(new[] {'.', '?', '!', ' ', ';', ':', ','},
                                          StringSplitOptions.RemoveEmptyEntries);
 
             // Create and execute the query. It executes immediately  
@@ -90,7 +95,7 @@ namespace FeatureExamplesTest
                                              select word;
 
             // Count the matches. 
-            var wordCount = matchQuery.Count();
+            int wordCount = matchQuery.Count();
             Console.WriteLine("{0} occurrences(s) of the search term \"{1}\" were found.", wordCount, searchTerm);
         }
 
@@ -100,13 +105,13 @@ namespace FeatureExamplesTest
             string[] names1 = {"nick", "david", "carry"};
             string[] names2 = {"carry", "david"};
 
-            var includedNames = names1.Where(names2.Contains);
+            IEnumerable<string> includedNames = names1.Where(names2.Contains);
             foreach (string item in includedNames)
             {
                 Console.WriteLine(item);
             }
 
-            var excludedNames = names1.Except(names2);
+            IEnumerable<string> excludedNames = names1.Except(names2);
             foreach (string item in excludedNames)
             {
                 Console.WriteLine(item);
@@ -158,7 +163,7 @@ namespace FeatureExamplesTest
             var dateTime = new DateTime(2012, 11, 5);
             var dateFormater = new DateFormater();
 
-            var yyyyMmDd = dateFormater.YYYY_MM_DD(dateTime);
+            string yyyyMmDd = dateFormater.YYYY_MM_DD(dateTime);
 
             Assert.AreEqual("2012_11_05", yyyyMmDd);
         }
@@ -171,38 +176,62 @@ namespace FeatureExamplesTest
 
             var productQuery =
                 from prod in products
-                select new {prod.Color, prod.Price};
+                select new {Color = prod.Color1, prod.Price};
 
             foreach (var v in productQuery)
             {
-                Console.WriteLine("Color={0}, Price={1}", v.Color, v.Price);
+                Console.WriteLine("Color1={0}, Price={1}", v.Color, v.Price);
             }
 
-            var value = product.GetColorAndPrice();
+            object value = product.GetColorAndPrice();
             Console.Out.WriteLine(value.ToString());
         }
-        
+
         [TestMethod]
         public void TestAnonymousType1()
         {
             var foo = new {name = "apple", diam = 4};
             var bar = new {name = "grape", diam = 1};
-            var anonArray = new[] { foo, bar };
+            var anonArray = new[] {foo, bar};
             Console.Out.WriteLine(anonArray[0].name);
             Console.Out.WriteLine(anonArray[0].diam);
+        }
+
+        [TestMethod]
+        public void NullableTypeTest()
+        {
+            int? c = null;
+            int d = c ?? -1;
+
+            Console.Out.WriteLine("d:" + d);
+            Product p = null;
+            Product q = p ?? new Product {Price = 5, Color1 = "RED"};
+        }
+
+        [TestMethod]
+        public void ShouldXXX()
+        {
+            string[] colors = {"green", "brown", "blue", "red"};
+            var s = "e";
+            var query = colors.Where(c => c.Contains(s));
+
+            s = "n";
+            query = query.Where(c => c.Contains(s));
+
+            Console.WriteLine(query.Count());
         }
     }
 
     public class Product
     {
-        public string Color;
+        public string Color1;
         public double Price;
-        public int ProducedYear;
         public string ProducedLocation;
+        public int ProducedYear;
 
         public object GetColorAndPrice()
         {
-            return new {Color, Price};
+            return new {Color = Color1, Price};
         }
     }
 }
