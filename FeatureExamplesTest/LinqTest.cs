@@ -14,9 +14,15 @@ namespace FeatureExamplesTest
             //Output: david carry
             string[] names1 = {"nick", "david", "carry"};
             string[] names2 = {"carry", "david"};
-            var selectedNames = names2.Where(names1.Contains);
+            var selectedNames = names1.Where(names2.Contains);
+            var bothHave = names1.Intersect(names2);
 
             foreach (var name in selectedNames)
+            {
+                Console.Out.WriteLine(name);
+            }
+
+            foreach (var name in bothHave)
             {
                 Console.Out.WriteLine(name);
             }
@@ -131,16 +137,16 @@ namespace FeatureExamplesTest
         public void CountWordOccurence()
         {
             // Count the occurence of words and output them in descending, ignore case
-            const string text = @"Historically, the world of data and the world of objects" +
-                                @" have not been well integrated. Programmers work in C# or Visual Basic" +
-                                @" and also in SQL or XQuery. On the one side are concepts such as classes," +
-                                @" objects, fields, inheritance, and .NET Framework APIs. On the other side" +
-                                @" are tables, columns, rows, nodes, and separate languages for dealing with" +
-                                @" them. Data types often require translation between the two worlds; there are" +
-                                @" different standard functions. Because the object world has no notion of query, a" +
-                                @" query can only be represented as a string without compile-time type checking or" +
-                                @" IntelliSense support in the IDE. Transferring data from SQL tables or XML trees to" +
-                                @" objects in memory is often tedious and error-prone.";
+            const string text = "Historically, the world of data and the world of objects" +
+                                " have not been well integrated. Programmers work in C# or Visual Basic" +
+                                " and also in SQL or XQuery. On the one side are concepts such as classes," +
+                                " objects, fields, inheritance, and .NET Framework APIs. On the other side" +
+                                " are tables, columns, rows, nodes, and separate languages for dealing with" +
+                                " them. Data types often require translation between the two worlds; there are" +
+                                " different standard functions. Because the object world has no notion of query, a" +
+                                " query can only be represented as a string without compile-time type checking or" +
+                                " IntelliSense support in the IDE. Transferring data from SQL tables or XML trees to" +
+                                " objects in memory is often tedious and error-prone.";
 
             var words = text.Split(new[] {'.', '?', '!', ' ', ';', ':', ','}, StringSplitOptions.RemoveEmptyEntries);
             var occurences =
