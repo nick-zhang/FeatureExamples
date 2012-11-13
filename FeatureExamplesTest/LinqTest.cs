@@ -25,12 +25,12 @@ namespace FeatureExamplesTest
             var selectedNames = names1.Where(names2.Contains);
             var bothHave = names1.Intersect(names2);
 
-            foreach (var name in selectedNames)
+            foreach (string name in selectedNames)
             {
                 Console.Out.WriteLine(name);
             }
 
-            foreach (var name in bothHave)
+            foreach (string name in bothHave)
             {
                 Console.Out.WriteLine(name);
             }
@@ -56,7 +56,7 @@ namespace FeatureExamplesTest
             //Output: NICK DAVID CARRY
             string[] names = {"nick", "david", "carry"};
             var upperWords = names.Select(name => name.ToUpper());
-            foreach (var word in upperWords)
+            foreach (string word in upperWords)
             {
                 Console.Out.WriteLine(word);
             }
@@ -67,8 +67,8 @@ namespace FeatureExamplesTest
         {
             //Output:carry david nick 
             string[] names = {"nick", "david", "carry"};
-            var orderedEnumerable = names.OrderBy(s => s);
-            foreach (var name in orderedEnumerable)
+            IOrderedEnumerable<string> orderedEnumerable = names.OrderBy(s => s);
+            foreach (string name in orderedEnumerable)
             {
                 Console.Out.WriteLine(name);
             }
@@ -79,11 +79,41 @@ namespace FeatureExamplesTest
         {
             //Output: nick david carray
             string[] names1 = {"nick", "david", "carry"};
-            var orderedEnumerable = names1.OrderByDescending(s => s);
-            foreach (var name in orderedEnumerable)
+            IOrderedEnumerable<string> orderedEnumerable = names1.OrderByDescending(s => s);
+            foreach (string name in orderedEnumerable)
             {
                 Console.Out.WriteLine(name);
             }
+        }
+
+        [TestMethod]
+        public void ShouldPrintAllFlowerNamesByOnlyOneForeach()
+        {
+            var bouquets = new List<Bouquet>
+                               {
+                                    new Bouquet { Flowers = new List<string> { "sunflower", "daisy", "daffodil", "larkspur" }},
+                                    new Bouquet{ Flowers = new List<string> { "tulip", "rose", "orchid" }},
+                                    new Bouquet{ Flowers = new List<string> { "gladiolis", "lily", "snapdragon", "aster", "protea" }},
+                                    new Bouquet{ Flowers = new List<string> { "larkspur", "lilac", "iris", "dahlia" }}
+                               };
+
+            // *********** Select ***********            
+//            var query1 = bouquets.Select(bq => bq.Flowers);
+//            foreach (var query in query1)
+//            {
+//                foreach (var flower in query)
+//                {
+//                    Console.Out.WriteLine(flower);
+//                }
+//            }
+
+            // ********* SelectMany *********
+            var query2 = bouquets.SelectMany(bq => bq.Flowers);
+            foreach (var flower in query2)
+            {
+                Console.Out.WriteLine(flower);
+            }
+
         }
 
         [TestMethod]
@@ -102,7 +132,7 @@ namespace FeatureExamplesTest
             //Possbile output: hppay
             const string word = "happy";
             var random = new Random();
-            var randomLetterInMiddle = word[0] +
+            string randomLetterInMiddle = word[0] +
                                           new string(
                                               word.Substring(1, word.Length - 2).ToCharArray().OrderBy(
                                                   s => random.Next()).ToArray()) + word[word.Length - 1];
@@ -114,7 +144,7 @@ namespace FeatureExamplesTest
         {
             //Output: does it matter not
             const string text = "It does not matter";
-            var orderedText = string.Join(" ", text.Split(' ').OrderBy(s => s));
+            string orderedText = string.Join(" ", text.Split(' ').OrderBy(s => s));
             Console.Out.WriteLine(orderedText);
         }
 
@@ -127,7 +157,7 @@ namespace FeatureExamplesTest
                 "According to a research at Cambridge University it does not matter in what order the letters in a word are";
 
             var random = new Random();
-            var scrambledText = string.Join(" ",
+            string scrambledText = string.Join(" ",
                                                text.Split(' ').Select(
                                                    word =>
                                                    word.Length < 3
@@ -156,8 +186,8 @@ namespace FeatureExamplesTest
                                 " IntelliSense support in the IDE. Transferring data from SQL tables or XML trees to" +
                                 " objects in memory is often tedious and error-prone.";
 
-            var words = text.Split(new[] {'.', '?', '!', ' ', ';', ':', ','}, StringSplitOptions.RemoveEmptyEntries);
-            var occurences =
+            string[] words = text.Split(new[] {'.', '?', '!', ' ', ';', ':', ','}, StringSplitOptions.RemoveEmptyEntries);
+            IOrderedEnumerable<IGrouping<string, string>> occurences =
                 words.GroupBy(w => w.ToLower()).OrderByDescending(g => g.Count());
 
             foreach (var i in occurences)
@@ -173,15 +203,15 @@ namespace FeatureExamplesTest
             var dog1 = new Dog {IsMale = true, Name = "dog1"};
             var dog2 = new Dog {IsMale = false, Name = "dog2"};
             var dog3 = new Dog {IsMale = true, Name = "dog3"};
-            var dogSpecial = new Dog(){Name = "specialDog"};
+            var dogSpecial = new Dog {Name = "specialDog"};
             var dog4 = new Dog {IsMale = false, Name = "dog4"};
             var dog5 = new Dog {IsMale = true, Name = "dog5"};
             var dogs = new List<Dog> {dog1, dog2, dog3, dog4, dog5};
 
-            var reorderedDogs =
+            IEnumerable<Dog> reorderedDogs =
                 dogs.Where(dog => dog.IsMale).Concat(new List<Dog> {dogSpecial}).Concat(dogs.Where(dog => !dog.IsMale));
 
-            foreach (var dog in reorderedDogs)
+            foreach (Dog dog in reorderedDogs)
             {
                 Console.Out.WriteLine(dog.Name);
             }
@@ -192,5 +222,10 @@ namespace FeatureExamplesTest
     {
         public bool IsMale;
         public string Name;
+    }
+
+    internal class Bouquet
+    {
+        public List<string> Flowers { get; set; }
     }
 }
