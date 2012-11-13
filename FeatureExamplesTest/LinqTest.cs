@@ -9,6 +9,14 @@ namespace FeatureExamplesTest
     public class LinqTest
     {
         [TestMethod]
+        public void CalculatAverage()
+        {
+            // 1 - 10
+            var average = Enumerable.Range(1, 10).Select(x => x*x).Average();
+            Console.Out.WriteLine(average);
+        }
+
+        [TestMethod]
         public void FilterItemsContainedByOtherArray()
         {
             //Output: david carry
