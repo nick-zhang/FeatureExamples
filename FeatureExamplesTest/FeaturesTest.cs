@@ -57,7 +57,7 @@ namespace FeatureExamplesTest
         public void TestLINQ1()
         {
             // Specify the data source. 
-            var scores = new[] {97, 92, 81, 60};
+            int[] scores = new[] {97, 92, 81, 60};
 
             IEnumerable<int> scoresGT80 = scores.Where(score => score > 80);
 
@@ -150,11 +150,11 @@ namespace FeatureExamplesTest
                               };
 
             IEnumerable<Student> query = from Student student in arrList
-                                         where student.Scores[0] > 95
+                                         where student.Scores.Any(s => s > 95)
                                          select student;
 
             foreach (Student s in query)
-                Console.WriteLine(s.LastName + ": " + s.Scores[0]);
+                Console.WriteLine(s.LastName);
         }
 
         [TestMethod]
@@ -176,14 +176,14 @@ namespace FeatureExamplesTest
 
             var productQuery =
                 from prod in products
-                select new {Color = prod.Color1, prod.Price};
+                select new {Color = prod.Color, prod.Price};
 
             foreach (var v in productQuery)
             {
-                Console.WriteLine("Color1={0}, Price={1}", v.Color, v.Price);
+                Console.WriteLine("Color={0}, Price={1}", v.Color, v.Price);
             }
 
-            object value = product.GetColorAndPrice();
+            var value = product.GetColorAndPrice();
             Console.Out.WriteLine(value.ToString());
         }
 
@@ -201,37 +201,15 @@ namespace FeatureExamplesTest
         public void NullableTypeTest()
         {
             int? c = null;
+
             int d = c ?? -1;
+
+            int k = 5;
 
             Console.Out.WriteLine("d:" + d);
             Product p = null;
-            Product q = p ?? new Product {Price = 5, Color1 = "RED"};
-        }
+            Product q = p ?? new Product {Price = 5, Color = "RED"};
 
-        [TestMethod]
-        public void ShouldXXX()
-        {
-            string[] colors = {"green", "brown", "blue", "red"};
-            var s = "e";
-            var query = colors.Where(c => c.Contains(s));
-
-            s = "n";
-            query = query.Where(c => c.Contains(s));
-
-            Console.WriteLine(query.Count());
-        }
-    }
-
-    public class Product
-    {
-        public string Color1;
-        public double Price;
-        public string ProducedLocation;
-        public int ProducedYear;
-
-        public object GetColorAndPrice()
-        {
-            return new {Color = Color1, Price};
         }
     }
 }
