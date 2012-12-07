@@ -50,6 +50,7 @@
     </CodeAnalysisDependentAssemblyPaths>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExpressionTreeTest.cs" />
     <Compile Include="LinqTest.cs" />
     <Compile Include="MoqTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
