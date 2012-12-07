@@ -94,9 +94,7 @@ namespace FeatureExamplesTest
         public void FindTheFirstEvenNumber()
         {
             var numbers = new int[] {3, 5, 6, 8};
-            var takeWhile = numbers.SkipWhile(n => n%2 != 0).First();
-            var first = numbers.First(n => n%2 == 0);
-            Console.Out.WriteLine(takeWhile);
+            
         }
 
 
