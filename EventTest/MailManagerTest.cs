@@ -7,12 +7,24 @@ namespace EventTest
     public class MailManagerTest
     {
         [TestMethod]
-        public void TestMethod1()
+        public void ShouldResponseToNewMailEvent()
         {
             var mailManager = new MailManager();
             new Fax(mailManager);
 
             mailManager.SimulateNewMail("Nick", "Carry", "Hello World");
+        }
+
+        [TestMethod]
+        public void ShouldNotResponseToNewMailEventWhenUnregistered()
+        {
+            var mailManager = new MailManager();
+            var fax = new Fax(mailManager);
+
+            mailManager.SimulateNewMail("Nick", "Carry", "Hello World");
+
+            fax.Unregister(mailManager);
+            mailManager.SimulateNewMail("Nancy", "James", "Good Morning");
         }
     }
 }
