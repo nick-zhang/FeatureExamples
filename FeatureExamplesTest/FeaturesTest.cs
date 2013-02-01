@@ -165,6 +165,8 @@ namespace FeatureExamplesTest
 
             string yyyyMmDd = dateFormater.YYYY_MM_DD(dateTime);
 
+            var formatted = dateTime.YYYY_MM_DD();
+
             Assert.AreEqual("2012_11_05", yyyyMmDd);
         }
 
@@ -201,6 +203,7 @@ namespace FeatureExamplesTest
         public void NullableTypeTest()
         {
             int? c = null;
+//            Nullable<int> a = 0;
 
             int d = c ?? -1;
 
@@ -209,7 +212,8 @@ namespace FeatureExamplesTest
             Console.Out.WriteLine("d:" + d);
             Product p = null;
             Product q = p ?? new Product {Price = 5, Color = "RED"};
-
         }
+
+
     }
 }

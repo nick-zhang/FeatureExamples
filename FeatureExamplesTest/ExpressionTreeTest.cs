@@ -31,12 +31,11 @@ namespace FeatureExamplesTest
             LambdaExpression lambda =
                 Expression.Lambda<Func<int, int, int>>(binaryBody, paraLeft, paraRight);
             Console.WriteLine(lambda.ToString());
-            foreach (var parameter in lambda.Parameters)
-            {
-                Console.Out.WriteLine(parameter);
-            }
+//            foreach (var parameter in lambda.Parameters)
+//            {
+//                Console.Out.WriteLine(parameter);
+//            }
 
-//
 //            var compile = lambda.Compile();
 //            var dynamicInvoke = compile.DynamicInvoke(1, 2);
 //            Console.Out.WriteLine(dynamicInvoke);
@@ -119,6 +118,18 @@ namespace FeatureExamplesTest
                 The Phone Company
                 Wide World Importers
             */
+        }
+
+        [TestMethod]
+        public void Should_Expression_Tree_4()
+        {
+            var paraLeft = Expression.Constant(0, typeof (int));
+            var paraRight = Expression.Parameter(typeof(int), "a");
+            var expressionBody = Expression.Subtract(paraLeft, paraRight);
+
+            LambdaExpression lambda =
+                Expression.Lambda<Func<int, int>>(expressionBody, paraRight);
+            Console.Out.WriteLine(lambda.ToString());
         }
     }
 }

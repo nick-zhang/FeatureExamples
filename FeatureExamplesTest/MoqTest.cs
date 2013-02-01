@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 
 namespace FeatureExamplesTest
-{
+{   
     [TestClass]
     public class MoqTest
     {
@@ -20,7 +20,7 @@ namespace FeatureExamplesTest
             Assert.AreEqual("Red", showColor);
             mock.Verify();
         }
-        
+
         [TestMethod]
         public void MockMethodOnInterfaceCanWork()
         {
@@ -35,7 +35,7 @@ namespace FeatureExamplesTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
+        [ExpectedException(typeof (NotSupportedException))]
         public void MockPropertyOnClassCanNotWork()
         {
             var student = new Student();
@@ -49,7 +49,7 @@ namespace FeatureExamplesTest
         }
 
         [TestMethod]
-        [ExpectedException(typeof(NotSupportedException))]
+        [ExpectedException(typeof (NotSupportedException))]
         public void MockClassNonVirtualMethodDoesNotWork()
         {
             var student = new Student();

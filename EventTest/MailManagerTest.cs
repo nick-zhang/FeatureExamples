@@ -20,7 +20,7 @@ namespace EventTest
         {
             var mailManager = new MailManager();
             var fax = new Fax(mailManager);
-
+                
             mailManager.SimulateNewMail("Nick", "Carry", "Hello World");
 
             fax.Unregister(mailManager);
