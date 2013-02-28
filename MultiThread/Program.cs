@@ -11,10 +11,10 @@ namespace MultiThread
         private static void Main(string[] args)
         {
             var program = new Program();
-            var nonParameterThread = new Thread(new ThreadStart(program.NonParameterRun));
+            var nonParameterThread = new Thread(program.NonParameterRun);
             nonParameterThread.Start();
 
-            var parameterizedThread1 = new Thread(program.ParameterRun) {Name = "Thread A"};
+            var parameterizedThread1 = new Thread(program.ParameterRun) { Name = "Thread A" };
             parameterizedThread1.Start(300);
 
             var parameterizedThread2 = new Thread(program.ParameterRun) {Name = "Thread B:"};
@@ -38,6 +38,7 @@ namespace MultiThread
         {
             int j;
             int.TryParse(ms.ToString(), out j); //这里采用了TryParse方法，避免不能转换时出现异常  
+            int r;
             for (int i = 0; i < 10; i++)
             {
                 Console.WriteLine(Thread.CurrentThread.Name + "系统当前时间毫秒值：" +
