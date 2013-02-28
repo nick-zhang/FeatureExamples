@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventTest", "EventTest\Even
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GarbageCollection", "GarbageCollection\GarbageCollection.csproj", "{D939005E-C88C-4985-856F-F89E552D9F79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MultiThread", "MultiThread\MultiThread.csproj", "{B6343C3A-4A58-4CF4-85D2-0E016FC232B8}"
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = FeatureExamples.vsmdi
@@ -81,6 +83,16 @@ Global
 		{D939005E-C88C-4985-856F-F89E552D9F79}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D939005E-C88C-4985-856F-F89E552D9F79}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D939005E-C88C-4985-856F-F89E552D9F79}.Release|x86.ActiveCfg = Release|Any CPU
+		{B6343C3A-4A58-4CF4-85D2-0E016FC232B8}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{B6343C3A-4A58-4CF4-85D2-0E016FC232B8}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{B6343C3A-4A58-4CF4-85D2-0E016FC232B8}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{B6343C3A-4A58-4CF4-85D2-0E016FC232B8}.Debug|x86.ActiveCfg = Debug|x86
+		{B6343C3A-4A58-4CF4-85D2-0E016FC232B8}.Debug|x86.Build.0 = Debug|x86
+		{B6343C3A-4A58-4CF4-85D2-0E016FC232B8}.Release|Any CPU.ActiveCfg = Release|x86
+		{B6343C3A-4A58-4CF4-85D2-0E016FC232B8}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{B6343C3A-4A58-4CF4-85D2-0E016FC232B8}.Release|Mixed Platforms.Build.0 = Release|x86
+		{B6343C3A-4A58-4CF4-85D2-0E016FC232B8}.Release|x86.ActiveCfg = Release|x86
+		{B6343C3A-4A58-4CF4-85D2-0E016FC232B8}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
