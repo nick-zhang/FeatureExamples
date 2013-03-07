@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace LinqToSQLTest
@@ -26,6 +27,19 @@ namespace LinqToSQLTest
                 }
             }
         }
+
+        [TestMethod]
+        public void ShouldUseLinqToSqlToQueryData()
+        {
+            var db = new NorthwindDataContext();
+            var customers = db.Customers.Take(2);
+            foreach (var customer in customers)
+            {
+                Console.WriteLine("{0} {1} {2}",
+                                       customer.CustomerID, customer.CompanyName, customer.ContactName);
+            }
+        }
     }
+
 }
 
